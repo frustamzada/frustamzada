@@ -1,0 +1,351 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  FREE
+  PREMIUM
+  COLLABORATOR
+  ADMIN
+}
+
+enum Language {
+  az
+  en
+  ru
+}
+
+enum PredictionStatus {
+  PENDING
+  WON
+  LOST
+  VOID
+}
+
+enum PredictionType {
+  MATCH_WINNER
+  CORRECT_SCORE
+  OVER_UNDER
+  BOTH_TEAMS_SCORE
+  HANDICAP
+  CUSTOM
+}
+
+enum Sport {
+  FOOTBALL
+  BASKETBALL
+  TENNIS
+  VOLLEYBALL
+  HOCKEY
+  MMA
+  OTHER
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+}
+
+enum ReportType {
+  PRE_GAME
+  LIVE
+  POST_GAME
+}
+
+enum BadgeLevel {
+  BEGINNER
+  RISING_STAR
+  EXPERT
+  MASTER
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  name              String
+  passwordHash      String
+  avatar            String?
+  bio               String?
+  role              UserRole  @default(FREE)
+  preferredLanguage Language  @default(az)
+  isVerified        Boolean   @default(false)
+  ageVerified       Boolean   @default(false)
+  dateOfBirth       DateTime?
+  badge             BadgeLevel @default(BEGINNER)
+
+  // Collaborator fields
+  collaboratorBio         String?
+  subscriptionPriceAZN    Float?    @default(0)
+  totalEarningsAZN        Float     @default(0)
+  platformCommissionRate  Float     @default(0.20)
+
+  // Stats
+  totalPredictions  Int     @default(0)
+  wonPredictions    Int     @default(0)
+  lostPredictions   Int     @default(0)
+  successRate       Float   @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  predictions     Prediction[]
+  couponPredictions CouponPrediction[]
+  comments        Comment[]
+  likes           Like[]
+  analyticsReports AnalyticsReport[]
+
+  // Social
+  followers     Follow[] @relation("following")
+  following     Follow[] @relation("follower")
+
+  // Subscriptions
+  subscribedTo    Subscription[] @relation("subscriber")
+  subscribers     Subscription[] @relation("subscribedTo")
+
+  // Premium subscription
+  premiumSubscription PremiumSubscription?
+
+  @@index([role])
+  @@index([successRate(sort: Desc)])
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  follower  User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followingId])
+}
+
+model Subscription {
+  id              String             @id @default(cuid())
+  subscriberId    String
+  collaboratorId  String
+  status          SubscriptionStatus @default(ACTIVE)
+  amountAZN       Float
+  platformFeeAZN  Float
+  startDate       DateTime           @default(now())
+  endDate         DateTime?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  subscriber   User @relation("subscriber", fields: [subscriberId], references: [id], onDelete: Cascade)
+  collaborator User @relation("subscribedTo", fields: [collaboratorId], references: [id], onDelete: Cascade)
+
+  @@index([subscriberId])
+  @@index([collaboratorId])
+}
+
+model PremiumSubscription {
+  id        String             @id @default(cuid())
+  userId    String             @unique
+  status    SubscriptionStatus @default(ACTIVE)
+  amountAZN Float
+  startDate DateTime           @default(now())
+  endDate   DateTime?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Match {
+  id          String   @id @default(cuid())
+  sport       Sport
+  league      String
+  homeTeam    String
+  awayTeam    String
+  homeTeamLogo String?
+  awayTeamLogo String?
+  matchDate   DateTime
+  isLive      Boolean  @default(false)
+  isFinished  Boolean  @default(false)
+
+  // Scores
+  homeScore   Int?
+  awayScore   Int?
+
+  // Odds from local bookmakers
+  oddsMisliHome  Float?
+  oddsMisliDraw  Float?
+  oddsMisliAway  Float?
+  oddsTopazHome  Float?
+  oddsTopazDraw  Float?
+  oddsTopazAway  Float?
+
+  // Additional info
+  venue       String?
+  referee     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  predictions      Prediction[]
+  couponMatches    CouponMatch[]
+  analyticsReports AnalyticsReport[]
+
+  @@index([sport, matchDate])
+  @@index([isLive])
+  @@index([matchDate])
+}
+
+model Prediction {
+  id             String           @id @default(cuid())
+  userId         String
+  matchId        String
+  predictionType PredictionType
+  prediction     String           // e.g., "HOME", "2-1", "OVER 2.5"
+  odds           Float?
+  confidence     Int?             // 1-10
+  reasoning      String?
+  language       Language         @default(az)
+  status         PredictionStatus @default(PENDING)
+  isPremium      Boolean          @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  match    Match     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  comments Comment[]
+  likes    Like[]
+
+  @@index([userId])
+  @@index([matchId])
+  @@index([status])
+  @@index([createdAt(sort: Desc)])
+}
+
+model CouponPrediction {
+  id         String           @id @default(cuid())
+  userId     String
+  title      String
+  reasoning  String?
+  language   Language         @default(az)
+  totalOdds  Float?
+  status     PredictionStatus @default(PENDING)
+  isPremium  Boolean          @default(false)
+  confidence Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matches CouponMatch[]
+  comments Comment[]     @relation("couponComments")
+  likes    Like[]        @relation("couponLikes")
+
+  @@index([userId])
+  @@index([createdAt(sort: Desc)])
+}
+
+model CouponMatch {
+  id                 String           @id @default(cuid())
+  couponPredictionId String
+  matchId            String
+  predictionType     PredictionType
+  prediction         String
+  odds               Float?
+  status             PredictionStatus @default(PENDING)
+
+  couponPrediction CouponPrediction @relation(fields: [couponPredictionId], references: [id], onDelete: Cascade)
+  match            Match             @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@index([couponPredictionId])
+}
+
+model AnalyticsReport {
+  id         String     @id @default(cuid())
+  matchId    String?
+  authorId   String
+  reportType ReportType
+  isPremium  Boolean    @default(true)
+  sport      Sport?
+  league     String?
+
+  // Multi-language content
+  titleAz    String
+  titleEn    String?
+  titleRu    String?
+  contentAz  String
+  contentEn  String?
+  contentRu  String?
+  summaryAz  String?
+  summaryEn  String?
+  summaryRu  String?
+
+  // Metadata
+  coverImage String?
+  tags       String[]
+  viewCount  Int      @default(0)
+  isFeatured Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  match  Match? @relation(fields: [matchId], references: [id], onDelete: SetNull)
+
+  @@index([reportType])
+  @@index([isFeatured])
+  @@index([createdAt(sort: Desc)])
+}
+
+model Comment {
+  id                  String  @id @default(cuid())
+  userId              String
+  predictionId        String?
+  couponPredictionId  String?
+  content             String
+  language            Language @default(az)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prediction       Prediction?       @relation(fields: [predictionId], references: [id], onDelete: Cascade)
+  couponPrediction CouponPrediction? @relation("couponComments", fields: [couponPredictionId], references: [id], onDelete: Cascade)
+
+  @@index([predictionId])
+  @@index([couponPredictionId])
+}
+
+model Like {
+  id                  String  @id @default(cuid())
+  userId              String
+  predictionId        String?
+  couponPredictionId  String?
+
+  createdAt DateTime @default(now())
+
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prediction       Prediction?       @relation(fields: [predictionId], references: [id], onDelete: Cascade)
+  couponPrediction CouponPrediction? @relation("couponLikes", fields: [couponPredictionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, predictionId])
+  @@unique([userId, couponPredictionId])
+}
+
+model Translation {
+  id       String @id @default(cuid())
+  key      String @unique
+  valueAz  String
+  valueEn  String
+  valueRu  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
