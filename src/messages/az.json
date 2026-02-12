@@ -58,6 +58,79 @@
     "registerButton": "Qeydiyyatdan keç",
     "languagePreference": "Dil seçimi"
   },
+  "header": {
+    "search": "Axtar",
+    "switchLanguage": "Dil dəyiş",
+    "profile": "Profil",
+    "settings": "Parametrlər",
+    "logout": "Çıxış",
+    "login": "Daxil ol",
+    "register": "Qeydiyyat",
+    "closeMenu": "Menyunu bağla",
+    "openMenu": "Menyunu aç",
+    "nav": {
+      "feed": "Lenta",
+      "matches": "Matçlar",
+      "predictions": "Proqnozlar",
+      "analytics": "Analitika",
+      "leaderboard": "Liderlik Cədvəli"
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "main": "Əsas",
+      "sports": "İdman növləri",
+      "editorsPicks": "Redaksiya seçimləri",
+      "trending": "Trend"
+    },
+    "nav": {
+      "feed": "Lenta",
+      "matches": "Matçlar",
+      "predictions": "Proqnozlar",
+      "analytics": "Analitika",
+      "leaderboard": "Liderlik Cədvəli"
+    },
+    "sports": {
+      "football": "Futbol",
+      "basketball": "Basketbol",
+      "tennis": "Tennis",
+      "esports": "E-idman",
+      "mma": "MMA"
+    }
+  },
+  "footer": {
+    "disclaimer": "Bu platforma yalnız təhlil təqdim edir. Biz mərc prosesini asanlaşdırmırıq.",
+    "tagline": "Azərbaycanda 1 nömrəli idman analitika platforması",
+    "sections": {
+      "product": "Məhsul",
+      "company": "Şirkət",
+      "legal": "Hüquqi",
+      "responsibleGambling": "Məsuliyyətli qumar"
+    },
+    "allRightsReserved": "Bütün hüquqlar qorunur",
+    "ageRestriction": "18+ yaş məhdudiyyəti",
+    "links": {
+      "feed": "Lenta",
+      "matches": "Matçlar",
+      "predictions": "Proqnozlar",
+      "analytics": "Analitika",
+      "leaderboard": "Liderlik Cədvəli",
+      "about": "Haqqımızda",
+      "contact": "Əlaqə",
+      "careers": "Karyera",
+      "press": "Mətbuat",
+      "terms": "İstifadə şərtləri",
+      "privacy": "Gizlilik siyasəti",
+      "cookies": "Çərəz siyasəti"
+    }
+  },
+  "mobileNav": {
+    "feed": "Lenta",
+    "matches": "Matçlar",
+    "predictions": "Proqnozlar",
+    "analytics": "Analitika",
+    "profile": "Profil"
+  },
   "feed": {
     "title": "Lenta",
     "trending": "Trend proqnozlar",
@@ -65,10 +138,24 @@
     "hotTakes": "Cəsarətli proqnozlar",
     "recentComments": "Son şərhlər",
     "editorPicks": "Redaksiya seçimləri",
+    "editorsPicks": "Redaksiya seçimləri",
     "filterBySport": "İdman növünə görə",
     "filterByLeague": "Liqaya görə",
     "personalizedFeed": "Sizin üçün",
-    "allPosts": "Bütün yazılar"
+    "allPosts": "Bütün yazılar",
+    "seeAll": "Hamısına bax",
+    "confidence": "Əminlik",
+    "forYou": "Sizin üçün",
+    "trendingPredictions": "Trend proqnozlar",
+    "likes": "Bəyənmələr",
+    "comments": "Şərhlər",
+    "recentActivity": "Son aktivlik",
+    "won": "Qazandı",
+    "lost": "Uduzdu",
+    "pending": "Gözləyir",
+    "coupon": "Kupon",
+    "matches": "Matçlar",
+    "totalOdds": "Ümumi əmsal"
   },
   "matches": {
     "title": "Matçlar",

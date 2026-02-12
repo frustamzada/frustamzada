@@ -58,6 +58,79 @@
     "registerButton": "Sign Up",
     "languagePreference": "Language Preference"
   },
+  "header": {
+    "search": "Search",
+    "switchLanguage": "Switch Language",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "login": "Log In",
+    "register": "Sign Up",
+    "closeMenu": "Close Menu",
+    "openMenu": "Open Menu",
+    "nav": {
+      "feed": "Feed",
+      "matches": "Matches",
+      "predictions": "Predictions",
+      "analytics": "Analytics",
+      "leaderboard": "Leaderboard"
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "main": "Main",
+      "sports": "Sports",
+      "editorsPicks": "Editor's Picks",
+      "trending": "Trending"
+    },
+    "nav": {
+      "feed": "Feed",
+      "matches": "Matches",
+      "predictions": "Predictions",
+      "analytics": "Analytics",
+      "leaderboard": "Leaderboard"
+    },
+    "sports": {
+      "football": "Football",
+      "basketball": "Basketball",
+      "tennis": "Tennis",
+      "esports": "Esports",
+      "mma": "MMA"
+    }
+  },
+  "footer": {
+    "disclaimer": "This platform provides analysis only. We do not facilitate betting.",
+    "tagline": "Azerbaijan's #1 Sports Analytics Platform",
+    "sections": {
+      "product": "Product",
+      "company": "Company",
+      "legal": "Legal",
+      "responsibleGambling": "Responsible Gambling"
+    },
+    "allRightsReserved": "All rights reserved",
+    "ageRestriction": "18+ Age Restriction",
+    "links": {
+      "feed": "Feed",
+      "matches": "Matches",
+      "predictions": "Predictions",
+      "analytics": "Analytics",
+      "leaderboard": "Leaderboard",
+      "about": "About",
+      "contact": "Contact",
+      "careers": "Careers",
+      "press": "Press",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    }
+  },
+  "mobileNav": {
+    "feed": "Feed",
+    "matches": "Matches",
+    "predictions": "Predictions",
+    "analytics": "Analytics",
+    "profile": "Profile"
+  },
   "feed": {
     "title": "Feed",
     "trending": "Trending Predictions",
@@ -65,10 +138,24 @@
     "hotTakes": "Hot Takes",
     "recentComments": "Recent Comments",
     "editorPicks": "Editor's Picks",
+    "editorsPicks": "Editor's Picks",
     "filterBySport": "Filter by Sport",
     "filterByLeague": "Filter by League",
     "personalizedFeed": "For You",
-    "allPosts": "All Posts"
+    "allPosts": "All Posts",
+    "seeAll": "See All",
+    "confidence": "Confidence",
+    "forYou": "For You",
+    "trendingPredictions": "Trending Predictions",
+    "likes": "Likes",
+    "comments": "Comments",
+    "recentActivity": "Recent Activity",
+    "won": "Won",
+    "lost": "Lost",
+    "pending": "Pending",
+    "coupon": "Coupon",
+    "matches": "Matches",
+    "totalOdds": "Total Odds"
   },
   "matches": {
     "title": "Matches",

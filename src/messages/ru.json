@@ -58,6 +58,79 @@
     "registerButton": "Зарегистрироваться",
     "languagePreference": "Языковые предпочтения"
   },
+  "header": {
+    "search": "Поиск",
+    "switchLanguage": "Сменить язык",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logout": "Выйти",
+    "login": "Войти",
+    "register": "Регистрация",
+    "closeMenu": "Закрыть меню",
+    "openMenu": "Открыть меню",
+    "nav": {
+      "feed": "Лента",
+      "matches": "Матчи",
+      "predictions": "Прогнозы",
+      "analytics": "Аналитика",
+      "leaderboard": "Таблица лидеров"
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "main": "Главное",
+      "sports": "Виды спорта",
+      "editorsPicks": "Выбор редакции",
+      "trending": "Популярное"
+    },
+    "nav": {
+      "feed": "Лента",
+      "matches": "Матчи",
+      "predictions": "Прогнозы",
+      "analytics": "Аналитика",
+      "leaderboard": "Таблица лидеров"
+    },
+    "sports": {
+      "football": "Футбол",
+      "basketball": "Баскетбол",
+      "tennis": "Теннис",
+      "esports": "Киберспорт",
+      "mma": "ММА"
+    }
+  },
+  "footer": {
+    "disclaimer": "Эта платформа предоставляет только аналитику. Мы не занимаемся ставками.",
+    "tagline": "Платформа спортивной аналитики №1 в Азербайджане",
+    "sections": {
+      "product": "Продукт",
+      "company": "Компания",
+      "legal": "Правовая информация",
+      "responsibleGambling": "Ответственная игра"
+    },
+    "allRightsReserved": "Все права защищены",
+    "ageRestriction": "Ограничение 18+",
+    "links": {
+      "feed": "Лента",
+      "matches": "Матчи",
+      "predictions": "Прогнозы",
+      "analytics": "Аналитика",
+      "leaderboard": "Таблица лидеров",
+      "about": "О нас",
+      "contact": "Контакты",
+      "careers": "Карьера",
+      "press": "Пресса",
+      "terms": "Условия использования",
+      "privacy": "Политика конфиденциальности",
+      "cookies": "Политика cookies"
+    }
+  },
+  "mobileNav": {
+    "feed": "Лента",
+    "matches": "Матчи",
+    "predictions": "Прогнозы",
+    "analytics": "Аналитика",
+    "profile": "Профиль"
+  },
   "feed": {
     "title": "Лента",
     "trending": "Популярные прогнозы",
@@ -65,10 +138,24 @@
     "hotTakes": "Смелые прогнозы",
     "recentComments": "Последние комментарии",
     "editorPicks": "Выбор редакции",
+    "editorsPicks": "Выбор редакции",
     "filterBySport": "По виду спорта",
     "filterByLeague": "По лиге",
     "personalizedFeed": "Для вас",
-    "allPosts": "Все публикации"
+    "allPosts": "Все публикации",
+    "seeAll": "Смотреть все",
+    "confidence": "Уверенность",
+    "forYou": "Для вас",
+    "trendingPredictions": "Популярные прогнозы",
+    "likes": "Лайки",
+    "comments": "Комментарии",
+    "recentActivity": "Последняя активность",
+    "won": "Выигран",
+    "lost": "Проигран",
+    "pending": "Ожидание",
+    "coupon": "Купон",
+    "matches": "Матчи",
+    "totalOdds": "Общий коэффициент"
   },
   "matches": {
     "title": "Матчи",
